@@ -18,6 +18,7 @@ public class RestClient {
         return closeableHttpResponse;
     }
 
+    //get request with headers
     public CloseableHttpResponse getWithHeader(String uri, HashMap<String, String> headers) throws IOException {
         CloseableHttpClient closeableHttpClient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet(uri); //http req
