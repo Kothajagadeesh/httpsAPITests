@@ -34,11 +34,9 @@ public class postApiTest extends BaseTestApi {
         closeableHttpResponse = restClient.postRequest(uri, jsonFile, req_headers);
         int statusCode = closeableHttpResponse.getStatusLine().getStatusCode();
         Assert.assertEquals(statusCode, StatusCodes.STATUS_CREATED);
-
         //Response JSON
         String httpEntity = EntityUtils.toString(closeableHttpResponse.getEntity(), "UTF-8");
         System.out.println("http entity or response json>>>> " + new JSONObject(httpEntity));
-
         //Response Headers
         Header[] res_headers = closeableHttpResponse.getAllHeaders();
         HashMap<String, String> getHeaders = new HashMap<String, String>();
@@ -47,6 +45,30 @@ public class postApiTest extends BaseTestApi {
         }
         System.out.println("Response headers >>>>> " + getHeaders);
 
+    }
+
+    @Test
+    public void postApiFailedTests() throws Exception {
+        uri = properties.getProperty("url") + properties.getProperty("register");
+        RestClient restClient = new RestClient();
+        HashMap<String, String> req_headers = new HashMap<String, String>();
+        req_headers.put("Content-Type", "application/json");
+        String jsonFile = "{\n" +
+                "    \"email\": \"sydney@fife\"\n" +
+                "}";
+        closeableHttpResponse = restClient.postRequest(uri, jsonFile, req_headers);
+        int statusCode = closeableHttpResponse.getStatusLine().getStatusCode();
+        Assert.assertEquals(statusCode, StatusCodes.BAD_REQUEST);
+        //Response JSON
+        String httpEntity = EntityUtils.toString(closeableHttpResponse.getEntity(), "UTF-8");
+        System.out.println("http entity or response json>>>> " + new JSONObject(httpEntity));
+        //Response Headers
+        Header[] res_headers = closeableHttpResponse.getAllHeaders();
+        HashMap<String, String> getHeaders = new HashMap<String, String>();
+        for (Header header : res_headers) {
+            getHeaders.put(header.getName(), header.getValue());
+        }
+        System.out.println("Response headers >>>>> " + getHeaders);
     }
 
 }

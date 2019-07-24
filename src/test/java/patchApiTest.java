@@ -32,8 +32,7 @@ public class patchApiTest extends BaseTestApi {
                 "    \"job\": \"zion resident\"\n" +
                 "}";
         closeableHttpResponse = restClient.patchRequest(uri, jsonFile, req_headers);
-        int statusCode = closeableHttpResponse.getStatusLine().getStatusCode();
-        Assert.assertEquals(statusCode, StatusCodes.STATUS_OK);
+        int statusCode = closeableHttpResponse.getStatusLine().getStatusCode();        Assert.assertEquals(statusCode, StatusCodes.STATUS_OK);
         //Response JSON
         String httpEntity = EntityUtils.toString(closeableHttpResponse.getEntity(), "UTF-8");
         System.out.println("http entity or response json>>>> " + new JSONObject(httpEntity));
