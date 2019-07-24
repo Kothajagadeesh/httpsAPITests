@@ -7,7 +7,7 @@ public class BaseTestApi {
 
     public Properties properties;
 
-    public void init() {
+    public void loadPropertiesFile() {
         try {
             properties = new Properties();
             FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "/src/main/resources/config.properties");

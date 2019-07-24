@@ -17,7 +17,7 @@ public class getApiTest extends BaseTestApi {
 
     @BeforeMethod
     public void setUp() {
-        init();
+        loadPropertiesFile();
         url = properties.getProperty("url");
         pathParameter = properties.getProperty("pathParameter");
         uri = url + pathParameter;

@@ -1,12 +1,9 @@
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.*;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,7 +33,7 @@ public class RestClient {
     }
 
     //post method
-    public CloseableHttpResponse postRequest(String uri, String jsonPayLoad, HashMap<String, String> headers) throws UnsupportedEncodingException, IOException {
+    public CloseableHttpResponse postRequest(String uri, String jsonPayLoad, HashMap<String, String> headers) throws IOException {
         CloseableHttpClient closeableHttpClient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(uri); //Http post request
         httpPost.setEntity(new StringEntity(jsonPayLoad)); //body/payload
@@ -48,4 +45,29 @@ public class RestClient {
         CloseableHttpResponse closeableHttpResponse = closeableHttpClient.execute(httpPost);
         return closeableHttpResponse;
     }
+
+    //post method
+    public CloseableHttpResponse putRequest(String uri, String jsonPayLoad, HashMap<String, String> headers) throws IOException {
+        CloseableHttpClient closeableHttpClient = HttpClients.createDefault();
+        HttpPut httpPut = new HttpPut(uri); //Http post request
+        httpPut.setEntity(new StringEntity(jsonPayLoad)); //body/payload
+        if (headers.size() != 0) { //checking headers size if not zero
+            for (Map.Entry<String, String> header : headers.entrySet()) { //loop all the headers
+                httpPut.addHeader(header.getKey(), header.getValue()); //add the headers to entry
+            }
+        }
+        CloseableHttpResponse closeableHttpResponse = closeableHttpClient.execute(httpPut);
+        return closeableHttpResponse;
+    }
+
+    //delete method
+    public CloseableHttpResponse deleteRequest(String uri) throws IOException {
+        CloseableHttpClient closeableHttpClient = HttpClients.createDefault();
+        HttpDelete httpDelete = new HttpDelete(uri);
+
+        CloseableHttpResponse closeableHttpResponse = closeableHttpClient.execute(httpDelete);
+        return closeableHttpResponse;
+    }
 }
+
+
