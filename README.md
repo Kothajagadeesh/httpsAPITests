@@ -1,2 +1,2 @@
-# restAssured
-Rest API Automation
+# httpsApiTest
+API Automation with HTTPS client
