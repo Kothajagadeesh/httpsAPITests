@@ -64,8 +64,21 @@ public class RestClient {
     public CloseableHttpResponse deleteRequest(String uri) throws IOException {
         CloseableHttpClient closeableHttpClient = HttpClients.createDefault();
         HttpDelete httpDelete = new HttpDelete(uri);
-
         CloseableHttpResponse closeableHttpResponse = closeableHttpClient.execute(httpDelete);
+        return closeableHttpResponse;
+    }
+
+    //patch method
+    public CloseableHttpResponse patchRequest(String uri, String jsonPayload, HashMap<String, String> headers) throws IOException {
+        CloseableHttpClient closeableHttpClient = HttpClients.createDefault();
+        HttpPatch httpPatch = new HttpPatch(uri);
+        if (headers.size() != 0) { //checking headers size if not zero
+            for (Map.Entry<String, String> header : headers.entrySet()) { //loop all the headers
+                httpPatch.addHeader(header.getKey(), header.getValue()); //add the headers to entry
+            }
+        }
+        httpPatch.setEntity(new StringEntity(jsonPayload));
+        CloseableHttpResponse closeableHttpResponse = closeableHttpClient.execute(httpPatch);
         return closeableHttpResponse;
     }
 }

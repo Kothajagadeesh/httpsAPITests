@@ -1,9 +1,9 @@
 import org.apache.http.Header;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONObject;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import util.StatusCodes;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -31,6 +31,7 @@ public class deleteApiTest extends BaseTestApi {
         System.out.println("Status code >>>" + statusCode);
         System.out.println("protocol >>>" + protocol);
         System.out.println("reason >>>" + statusMessage);
+        Assert.assertEquals(statusCode, StatusCodes.NO_CONTENT);
         //Response JSON
         // no json will be displayed
         //Response Headers
