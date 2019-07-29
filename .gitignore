@@ -1,5 +1,5 @@
 
 
 .idea/
-restAssured.iml
+*.iml
 target/
